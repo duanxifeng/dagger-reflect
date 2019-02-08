@@ -19,24 +19,7 @@ import javax.inject.Provider;
 
 interface Binding {
   abstract class UnlinkedBinding implements Binding {
-    abstract LinkRequest request();
-    abstract LinkedBinding<?> link(LinkedBinding<?>[] dependencies);
-  }
-
-  final class LinkRequest {
-    static final LinkRequest EMPTY = new LinkRequest(new Key[0]);
-
-    final Key[] keys;
-    final boolean[] optionals;
-
-    LinkRequest(Key[] keys) {
-      this(keys, new boolean[keys.length]);
-    }
-
-    LinkRequest(Key[] keys, boolean[] optionals) {
-      this.keys = keys;
-      this.optionals = optionals;
-    }
+    abstract LinkedBinding<?> link(Linker linker);
   }
 
   abstract class LinkedBinding<T> implements Binding, Provider<T> {

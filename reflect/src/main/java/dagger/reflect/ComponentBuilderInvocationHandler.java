@@ -101,8 +101,9 @@ final class ComponentBuilderInvocationHandler implements InvocationHandler {
         }
         ReflectiveComponentParser.parse(key, value, graphBuilder);
       }
+      Scope scope = new Scope(graphBuilder.build());
 
-      return ComponentInvocationHandler.create(componentClass, graphBuilder.build());
+      return ComponentInvocationHandler.create(componentClass, scope);
     }
 
     // TODO these are allowed to be void or a supertype
